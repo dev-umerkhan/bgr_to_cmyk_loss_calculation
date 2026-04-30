@@ -28,15 +28,15 @@ Assignment_1/
 ⚙️ Dependencies
 
 Install the required Python libraries:
-
+```
 pip install numpy opencv-python matplotlib colour-science scipy
-
+```
 ▶️ Execution
 
 Run the script from anywhere inside the project:
-
+```
 python3 Src/main.py
-
+```
 🖥️ Platform Compatibility
 
 Primary OS: Linux (Ubuntu/Debian) Display Support: Wayland / X11
