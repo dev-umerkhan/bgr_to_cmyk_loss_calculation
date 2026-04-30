@@ -24,7 +24,7 @@ Assignment_1/
     ├── est_ink_consumption.png     # Delta-E heatmap
     ├── input.png                   # Input image (RGB)
     └── reconst_img.png             # Reconstructed (CMYK → RGB)
-
+    
 ⚙️ Dependencies
 
 Install the required Python libraries:
