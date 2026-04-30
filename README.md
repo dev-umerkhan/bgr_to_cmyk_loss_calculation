@@ -11,7 +11,7 @@ This project addresses these challenges by: Performing pixel-wise RGB → CMYK c
 📁 Project Structure
 
 The project uses absolute paths to ensure the code works regardless of the execution directory.
-
+```
 Assignment_1/
 ├── Doxyfile                # Documentation configuration
 ├── (Doxygen-generated files)
@@ -24,7 +24,7 @@ Assignment_1/
     ├── est_ink_consumption.png     # Delta-E heatmap
     ├── input.png                   # Input image (RGB)
     └── reconst_img.png             # Reconstructed (CMYK → RGB)
-    
+ ```   
 ⚙️ Dependencies
 
 Install the required Python libraries:
