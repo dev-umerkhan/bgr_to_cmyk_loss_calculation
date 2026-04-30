@@ -1,0 +1,225 @@
+\doxysection{main Namespace Reference}
+\hypertarget{namespacemain}{}\label{namespacemain}\index{main@{main}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacemain_a22596da71dee737fde10d084c4e1558d}{bgr\+\_\+to\+\_\+cmyk}} (\mbox{\hyperlink{namespacemain_affe3dabfa04a6d302f35be4867b1890d}{input\+\_\+image}})
+\item 
+\mbox{\hyperlink{namespacemain_af72899625af94dd41e94dd69c00bef59}{disp\+\_\+save\+\_\+cmyk\+\_\+comp}} (cmyk\+\_\+img)
+\item 
+\mbox{\hyperlink{namespacemain_a3654118a2ce8fe526fb5898a5f63ff60}{est\+\_\+ink\+\_\+consumption}} (\mbox{\hyperlink{namespacemain_a03bd607949b7d2570575d2ebb05048bf}{cmyk\+\_\+image}})
+\item 
+\mbox{\hyperlink{namespacemain_a96fd59bd6843ad3f6ca6f2c28677876c}{limit\+\_\+ink\+\_\+consumption}} (consumption\+\_\+matrix, \mbox{\hyperlink{namespacemain_a03bd607949b7d2570575d2ebb05048bf}{cmyk\+\_\+image}})
+\item 
+\mbox{\hyperlink{namespacemain_a78581feb05110d1f92b84ddf89b158c5}{cmyk\+\_\+to\+\_\+bgr}} (\mbox{\hyperlink{namespacemain_a03bd607949b7d2570575d2ebb05048bf}{cmyk\+\_\+image}})
+\item 
+\mbox{\hyperlink{namespacemain_a68462140a09f1894ac237bc036f071af}{calc\+\_\+delta\+\_\+E}} (original\+\_\+image, converted\+\_\+image)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{namespacemain_af9657ff913ccd1f63f66d71e3f223401}{MAX\+\_\+\+INK\+\_\+\+CONSUMTION\+\_\+\+VALUE}} = 300
+\item 
+\mbox{\hyperlink{namespacemain_a69c50500fdccbf97de25266211b48e40}{SCRIPT\+\_\+\+DIR}} = os.\+path.\+dirname(os.\+path.\+abspath(\+\_\+\+\_\+file\+\_\+\+\_\+))
+\item 
+\mbox{\hyperlink{namespacemain_a4a7bc1602763bdf932c17aae1dbe2a03}{PICS\+\_\+\+DIR}} = os.\+path.\+join(os.\+path.\+dirname(\mbox{\hyperlink{namespacemain_a69c50500fdccbf97de25266211b48e40}{SCRIPT\+\_\+\+DIR}}), "{}Pics"{})
+\item 
+\mbox{\hyperlink{namespacemain_affe3dabfa04a6d302f35be4867b1890d}{input\+\_\+image}} = cv.\+imread(os.\+path.\+join(\mbox{\hyperlink{namespacemain_a4a7bc1602763bdf932c17aae1dbe2a03}{PICS\+\_\+\+DIR}}, "{}input.\+jpg"{}))
+\item 
+\mbox{\hyperlink{namespacemain_a03bd607949b7d2570575d2ebb05048bf}{cmyk\+\_\+image}} = np.\+zeros( (input\+\_\+image.\+shape\mbox{[}0\mbox{]}, input\+\_\+image.\+shape\mbox{[}1\mbox{]}, 4), dtype=np.\+float32)
+\item 
+\mbox{\hyperlink{namespacemain_ad8fd40a3ca431df1cc9a7ddfc57caeb6}{ink\+\_\+consumption\+\_\+matrix}} = np.\+zeros( (input\+\_\+image.\+shape\mbox{[}0\mbox{]}, input\+\_\+image.\+shape\mbox{[}1\mbox{]}), dtype=np.\+float32)
+\item 
+\mbox{\hyperlink{namespacemain_ab6ddeff99837ad057b80e714114da341}{bgr\+\_\+image}} = np.\+zeros( (input\+\_\+image.\+shape\mbox{[}0\mbox{]}, input\+\_\+image.\+shape\mbox{[}1\mbox{]}, 3), dtype=np.\+uint8)
+\item 
+\mbox{\hyperlink{namespacemain_ad84dafcd8a19da84722d84692e20fe52}{delta\+\_\+e\+\_\+matrix}} = np.\+zeros((input\+\_\+image.\+shape\mbox{[}0\mbox{]}, input\+\_\+image.\+shape\mbox{[}1\mbox{]}), dtype=np.\+float32)
+\item 
+\mbox{\hyperlink{namespacemain_a1228178cdbbd06f447ee10b33f96d995}{diff\+\_\+raw}} = cv.\+absdiff(\mbox{\hyperlink{namespacemain_affe3dabfa04a6d302f35be4867b1890d}{input\+\_\+image}}, \mbox{\hyperlink{namespacemain_ab6ddeff99837ad057b80e714114da341}{bgr\+\_\+image}}).astype(np.\+float32)
+\item 
+\mbox{\hyperlink{namespacemain_a8f689b5cf892985d7b4dfea7964d81b5}{diff\+\_\+image}} = np.\+clip(\mbox{\hyperlink{namespacemain_a1228178cdbbd06f447ee10b33f96d995}{diff\+\_\+raw}} \texorpdfstring{$\ast$}{*} 30, 0, 255).astype(np.\+uint8)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file main.py
+@brief CMYK color space processing and analysis
+
+@author
+    Muhammad Umer Khan  
+    Muhammad Abdullah Raja  
+
+@date 24.04.2025
+
+@details
+- Converts BGR to CMYK
+- Displays CMYK components
+- Estimates ink consumption
+- Limits ink usage
+- Converts back to BGR
+- Performs Delta-E analysis
+
+@references
+[1] Sharma et al., "CIEDE2000", 2005  
+[2] Adobe PostScript Language Reference, 3rd Ed.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacemain_a22596da71dee737fde10d084c4e1558d}\label{namespacemain_a22596da71dee737fde10d084c4e1558d} 
+\index{main@{main}!bgr\_to\_cmyk@{bgr\_to\_cmyk}}
+\index{bgr\_to\_cmyk@{bgr\_to\_cmyk}!main@{main}}
+\doxysubsubsection{\texorpdfstring{bgr\_to\_cmyk()}{bgr\_to\_cmyk()}}
+{\footnotesize\ttfamily main.\+bgr\+\_\+to\+\_\+cmyk (\begin{DoxyParamCaption}\item[{}]{input\+\_\+image }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Convert a BGR image to the CMYK color space.
+
+@param input_image numpy.ndarray (H, W, 3)
+    Input image in BGR format with values in range [0, 255].
+
+@return numpy.ndarray (H, W, 4)
+    Output image in CMYK format with values in range [0, 1].
+
+@note Uses an epsilon guard when K ≈ 1 to prevent division by zero.
+
+@see Adobe Systems, "PostScript Language Reference", 3rd Ed.,
+     Section 7.2 for CMYK color space conversions.
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_a68462140a09f1894ac237bc036f071af}\label{namespacemain_a68462140a09f1894ac237bc036f071af} 
+\index{main@{main}!calc\_delta\_E@{calc\_delta\_E}}
+\index{calc\_delta\_E@{calc\_delta\_E}!main@{main}}
+\doxysubsubsection{\texorpdfstring{calc\_delta\_E()}{calc\_delta\_E()}}
+{\footnotesize\ttfamily main.\+calc\+\_\+delta\+\_\+E (\begin{DoxyParamCaption}\item[{}]{original\+\_\+image,  }\item[{}]{converted\+\_\+image }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Compute Delta-E (CIEDE2000) between original and converted images.
+
+@param original_image numpy.ndarray (H, W, 3)
+    Original image in BGR format.
+
+@param converted_image numpy.ndarray (H, W, 3)
+    Reconstructed image in BGR format.
+
+@return numpy.ndarray (H, W)
+    Matrix of Delta-E values per pixel.
+
+@cite ISO/CIE 11664-6:2014 standard for colorimetry.
+
+@see Sharma et al. (2005) for details on CIEDE2000.
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_a78581feb05110d1f92b84ddf89b158c5}\label{namespacemain_a78581feb05110d1f92b84ddf89b158c5} 
+\index{main@{main}!cmyk\_to\_bgr@{cmyk\_to\_bgr}}
+\index{cmyk\_to\_bgr@{cmyk\_to\_bgr}!main@{main}}
+\doxysubsubsection{\texorpdfstring{cmyk\_to\_bgr()}{cmyk\_to\_bgr()}}
+{\footnotesize\ttfamily main.\+cmyk\+\_\+to\+\_\+bgr (\begin{DoxyParamCaption}\item[{}]{cmyk\+\_\+image }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Convert a CMYK image back to BGR color space.
+
+@param cmyk_image numpy.ndarray (H, W, 4)
+    Image in CMYK format.
+
+@return numpy.ndarray (H, W, 3)
+    Output image in BGR format with values in range [0, 255].
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_af72899625af94dd41e94dd69c00bef59}\label{namespacemain_af72899625af94dd41e94dd69c00bef59} 
+\index{main@{main}!disp\_save\_cmyk\_comp@{disp\_save\_cmyk\_comp}}
+\index{disp\_save\_cmyk\_comp@{disp\_save\_cmyk\_comp}!main@{main}}
+\doxysubsubsection{\texorpdfstring{disp\_save\_cmyk\_comp()}{disp\_save\_cmyk\_comp()}}
+{\footnotesize\ttfamily main.\+disp\+\_\+save\+\_\+cmyk\+\_\+comp (\begin{DoxyParamCaption}\item[{}]{cmyk\+\_\+img }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Display and save CMYK components as grayscale images.
+
+@param cmyk_img numpy.ndarray (H, W, 4)
+    Image in CMYK format with values in range [0, 1].
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_a3654118a2ce8fe526fb5898a5f63ff60}\label{namespacemain_a3654118a2ce8fe526fb5898a5f63ff60} 
+\index{main@{main}!est\_ink\_consumption@{est\_ink\_consumption}}
+\index{est\_ink\_consumption@{est\_ink\_consumption}!main@{main}}
+\doxysubsubsection{\texorpdfstring{est\_ink\_consumption()}{est\_ink\_consumption()}}
+{\footnotesize\ttfamily main.\+est\+\_\+ink\+\_\+consumption (\begin{DoxyParamCaption}\item[{}]{cmyk\+\_\+image }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Estimate ink consumption per pixel for a CMYK image.
+
+@param cmyk_image numpy.ndarray (H, W, 4)
+    Image in CMYK format.
+
+@return numpy.ndarray (H, W)
+    Matrix representing total ink consumption per pixel.
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_a96fd59bd6843ad3f6ca6f2c28677876c}\label{namespacemain_a96fd59bd6843ad3f6ca6f2c28677876c} 
+\index{main@{main}!limit\_ink\_consumption@{limit\_ink\_consumption}}
+\index{limit\_ink\_consumption@{limit\_ink\_consumption}!main@{main}}
+\doxysubsubsection{\texorpdfstring{limit\_ink\_consumption()}{limit\_ink\_consumption()}}
+{\footnotesize\ttfamily main.\+limit\+\_\+ink\+\_\+consumption (\begin{DoxyParamCaption}\item[{}]{consumption\+\_\+matrix,  }\item[{}]{cmyk\+\_\+image }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Limit ink consumption per pixel to a maximum threshold.
+
+@param consumption_matrix numpy.ndarray (H, W)
+    Ink consumption per pixel.
+
+@param cmyk_image numpy.ndarray (H, W, 4)
+    CMYK image to be modified in-place.
+
+@note The maximum ink limit is defined by MAX_INK_CONSUMPTION_VALUE.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacemain_ab6ddeff99837ad057b80e714114da341}\label{namespacemain_ab6ddeff99837ad057b80e714114da341} 
+\index{main@{main}!bgr\_image@{bgr\_image}}
+\index{bgr\_image@{bgr\_image}!main@{main}}
+\doxysubsubsection{\texorpdfstring{bgr\_image}{bgr\_image}}
+{\footnotesize\ttfamily main.\+bgr\+\_\+image = np.\+zeros( (input\+\_\+image.\+shape\mbox{[}0\mbox{]}, input\+\_\+image.\+shape\mbox{[}1\mbox{]}, 3), dtype=np.\+uint8)}
+
+\Hypertarget{namespacemain_a03bd607949b7d2570575d2ebb05048bf}\label{namespacemain_a03bd607949b7d2570575d2ebb05048bf} 
+\index{main@{main}!cmyk\_image@{cmyk\_image}}
+\index{cmyk\_image@{cmyk\_image}!main@{main}}
+\doxysubsubsection{\texorpdfstring{cmyk\_image}{cmyk\_image}}
+{\footnotesize\ttfamily main.\+cmyk\+\_\+image = np.\+zeros( (input\+\_\+image.\+shape\mbox{[}0\mbox{]}, input\+\_\+image.\+shape\mbox{[}1\mbox{]}, 4), dtype=np.\+float32)}
+
+\Hypertarget{namespacemain_ad84dafcd8a19da84722d84692e20fe52}\label{namespacemain_ad84dafcd8a19da84722d84692e20fe52} 
+\index{main@{main}!delta\_e\_matrix@{delta\_e\_matrix}}
+\index{delta\_e\_matrix@{delta\_e\_matrix}!main@{main}}
+\doxysubsubsection{\texorpdfstring{delta\_e\_matrix}{delta\_e\_matrix}}
+{\footnotesize\ttfamily main.\+delta\+\_\+e\+\_\+matrix = np.\+zeros((input\+\_\+image.\+shape\mbox{[}0\mbox{]}, input\+\_\+image.\+shape\mbox{[}1\mbox{]}), dtype=np.\+float32)}
+
+\Hypertarget{namespacemain_a8f689b5cf892985d7b4dfea7964d81b5}\label{namespacemain_a8f689b5cf892985d7b4dfea7964d81b5} 
+\index{main@{main}!diff\_image@{diff\_image}}
+\index{diff\_image@{diff\_image}!main@{main}}
+\doxysubsubsection{\texorpdfstring{diff\_image}{diff\_image}}
+{\footnotesize\ttfamily main.\+diff\+\_\+image = np.\+clip(\mbox{\hyperlink{namespacemain_a1228178cdbbd06f447ee10b33f96d995}{diff\+\_\+raw}} \texorpdfstring{$\ast$}{*} 30, 0, 255).astype(np.\+uint8)}
+
+\Hypertarget{namespacemain_a1228178cdbbd06f447ee10b33f96d995}\label{namespacemain_a1228178cdbbd06f447ee10b33f96d995} 
+\index{main@{main}!diff\_raw@{diff\_raw}}
+\index{diff\_raw@{diff\_raw}!main@{main}}
+\doxysubsubsection{\texorpdfstring{diff\_raw}{diff\_raw}}
+{\footnotesize\ttfamily main.\+diff\+\_\+raw = cv.\+absdiff(\mbox{\hyperlink{namespacemain_affe3dabfa04a6d302f35be4867b1890d}{input\+\_\+image}}, \mbox{\hyperlink{namespacemain_ab6ddeff99837ad057b80e714114da341}{bgr\+\_\+image}}).astype(np.\+float32)}
+
+\Hypertarget{namespacemain_ad8fd40a3ca431df1cc9a7ddfc57caeb6}\label{namespacemain_ad8fd40a3ca431df1cc9a7ddfc57caeb6} 
+\index{main@{main}!ink\_consumption\_matrix@{ink\_consumption\_matrix}}
+\index{ink\_consumption\_matrix@{ink\_consumption\_matrix}!main@{main}}
+\doxysubsubsection{\texorpdfstring{ink\_consumption\_matrix}{ink\_consumption\_matrix}}
+{\footnotesize\ttfamily main.\+ink\+\_\+consumption\+\_\+matrix = np.\+zeros( (input\+\_\+image.\+shape\mbox{[}0\mbox{]}, input\+\_\+image.\+shape\mbox{[}1\mbox{]}), dtype=np.\+float32)}
+
+\Hypertarget{namespacemain_affe3dabfa04a6d302f35be4867b1890d}\label{namespacemain_affe3dabfa04a6d302f35be4867b1890d} 
+\index{main@{main}!input\_image@{input\_image}}
+\index{input\_image@{input\_image}!main@{main}}
+\doxysubsubsection{\texorpdfstring{input\_image}{input\_image}}
+{\footnotesize\ttfamily main.\+input\+\_\+image = cv.\+imread(os.\+path.\+join(\mbox{\hyperlink{namespacemain_a4a7bc1602763bdf932c17aae1dbe2a03}{PICS\+\_\+\+DIR}}, "{}input.\+jpg"{}))}
+
+\Hypertarget{namespacemain_af9657ff913ccd1f63f66d71e3f223401}\label{namespacemain_af9657ff913ccd1f63f66d71e3f223401} 
+\index{main@{main}!MAX\_INK\_CONSUMTION\_VALUE@{MAX\_INK\_CONSUMTION\_VALUE}}
+\index{MAX\_INK\_CONSUMTION\_VALUE@{MAX\_INK\_CONSUMTION\_VALUE}!main@{main}}
+\doxysubsubsection{\texorpdfstring{MAX\_INK\_CONSUMTION\_VALUE}{MAX\_INK\_CONSUMTION\_VALUE}}
+{\footnotesize\ttfamily int main.\+MAX\+\_\+\+INK\+\_\+\+CONSUMTION\+\_\+\+VALUE = 300}
+
+\Hypertarget{namespacemain_a4a7bc1602763bdf932c17aae1dbe2a03}\label{namespacemain_a4a7bc1602763bdf932c17aae1dbe2a03} 
+\index{main@{main}!PICS\_DIR@{PICS\_DIR}}
+\index{PICS\_DIR@{PICS\_DIR}!main@{main}}
+\doxysubsubsection{\texorpdfstring{PICS\_DIR}{PICS\_DIR}}
+{\footnotesize\ttfamily main.\+PICS\+\_\+\+DIR = os.\+path.\+join(os.\+path.\+dirname(\mbox{\hyperlink{namespacemain_a69c50500fdccbf97de25266211b48e40}{SCRIPT\+\_\+\+DIR}}), "{}Pics"{})}
+
+\Hypertarget{namespacemain_a69c50500fdccbf97de25266211b48e40}\label{namespacemain_a69c50500fdccbf97de25266211b48e40} 
+\index{main@{main}!SCRIPT\_DIR@{SCRIPT\_DIR}}
+\index{SCRIPT\_DIR@{SCRIPT\_DIR}!main@{main}}
+\doxysubsubsection{\texorpdfstring{SCRIPT\_DIR}{SCRIPT\_DIR}}
+{\footnotesize\ttfamily main.\+SCRIPT\+\_\+\+DIR = os.\+path.\+dirname(os.\+path.\+abspath(\+\_\+\+\_\+file\+\_\+\+\_\+))}
+
